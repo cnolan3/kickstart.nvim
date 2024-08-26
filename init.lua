@@ -679,6 +679,10 @@ require('lazy').setup({
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         ts_ls = {},
 
+        cssls = {},
+
+        html = {},
+
         emmet_ls = {
           capabilities = capabilities,
           filetypes = { 'css', 'html', 'javascript', 'javascriptreact', 'less', 'sass', 'scss', 'pug', 'typescriptreact', 'typescript' },
