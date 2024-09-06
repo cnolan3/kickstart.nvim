@@ -10,6 +10,9 @@ return { -- nvim-tree, file explorer
       view = {
         adaptive_size = true,
       },
+      filters = {
+        git_ignored = false,
+      },
     }
 
     local api = require 'nvim-tree.api'
