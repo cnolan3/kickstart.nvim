@@ -106,7 +106,7 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -198,6 +198,16 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+-- show signature hints
+-- while in insert mode with CTRL+s
+vim.keymap.set('i', '<C-s>', function()
+  vim.lsp.buf.signature_help()
+end, { buffer = true })
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers['signature_help'], {
+  border = 'single',
+  close_events = { 'CursorMoved', 'BufHidden', 'InsertCharPre' },
+})
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -273,6 +283,22 @@ require('lazy').setup({
       },
     },
   },
+
+  {
+    'alexghergh/nvim-tmux-navigation',
+    config = function()
+      require('nvim-tmux-navigation').setup {
+        disable_when_zoomed = true,
+        keybindings = {
+          left = '<C-h>',
+          down = '<C-j>',
+          up = '<C-k>',
+          right = '<C-l>',
+          last_active = '<C-\\>',
+        },
+      }
+    end,
+  }, -- easily navigate between neovim and tmux panes
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
@@ -668,7 +694,14 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- clangd = {},
-        -- gopls = {},
+        gopls = {
+          settings = {
+            gopls = {
+              staticcheck = true,
+              gofumpt = true,
+            },
+          },
+        },
         -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -972,6 +1005,11 @@ require('lazy').setup({
       -- - gcc - (toggle comment for current line)
       require('mini.comment').setup()
 
+      -- split/join arguments
+      --
+      -- - gS   - toggle split/join arguments
+      require('mini.splitjoin').setup()
+
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
@@ -982,7 +1020,23 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = {
+        'bash',
+        'c',
+        'diff',
+        'html',
+        'css',
+        'javascript',
+        'typescript',
+        'go',
+        'lua',
+        'luadoc',
+        'markdown',
+        'markdown_inline',
+        'query',
+        'vim',
+        'vimdoc',
+      },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
