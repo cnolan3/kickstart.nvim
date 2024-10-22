@@ -24,6 +24,7 @@ return {
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
   },
+
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
     {
@@ -77,6 +78,7 @@ return {
       desc = 'Debug: See last session result.',
     },
   },
+
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
