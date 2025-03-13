@@ -17,6 +17,6 @@ return { -- nvim-tree, file explorer
 
     local api = require 'nvim-tree.api'
 
-    vim.keymap.set('n', '<leader>nt', api.tree.toggle, { desc = 'Toggle file tree pane' })
+    vim.keymap.set('n', '\\', api.tree.toggle, { desc = 'Toggle file tree pane' })
   end,
 }
