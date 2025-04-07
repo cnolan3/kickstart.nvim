@@ -6,7 +6,7 @@ return {
     require('tiny-inline-diagnostic').setup {
       preset = 'powerline',
       options = {
-        -- show_source = true,
+        show_source = true,
         multilines = {
           enabled = true,
           always_show = false,
