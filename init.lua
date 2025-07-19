@@ -749,7 +749,7 @@ require('lazy').setup({
 
         cssls = {},
 
-        html = {},
+        -- html-lsp = {},
 
         emmet_ls = {
           capabilities = capabilities,
@@ -788,8 +788,8 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
-        'prettierd', -- General formatter (deamon)
-        -- 'prettier', -- General formatter
+        -- 'prettierd', -- General formatter (deamon)
+        'prettier', -- General formatter
         'eslint_d', -- javascript linter
         'staticcheck',
       })
