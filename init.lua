@@ -102,6 +102,9 @@ vim.g.loaded_netrwPlugin = 1
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
+--  Make neovim automatically reload a file when edited externally
+vim.opt.autoread = true
+
 -- Make line numbers default
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
@@ -506,8 +509,8 @@ require('lazy').setup({
       -- Automatically install LSPs and related tools to stdpath for Neovim
       -- Mason must be loaded before its dependents so we need to set it up here.
       -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
-      { 'williamboman/mason.nvim', opts = {} },
-      'williamboman/mason-lspconfig.nvim',
+      { 'mason-org/mason.nvim', opts = {} },
+      'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
@@ -749,7 +752,7 @@ require('lazy').setup({
 
         cssls = {},
 
-        -- html-lsp = {},
+        html = {},
 
         emmet_ls = {
           capabilities = capabilities,
@@ -855,7 +858,7 @@ require('lazy').setup({
         javascriptreact = { 'prettier', stop_after_first = true },
         typescriptreact = { 'prettier', stop_after_first = true },
         css = { 'prettier', stop_after_first = true },
-        html = { 'prettier', stop_after_first = true },
+        -- html = { 'prettier', stop_after_first = true },
         json = { 'prettier', stop_after_first = true },
         yaml = { 'prettier', stop_after_first = true },
         markdown = { 'prettier', stop_after_first = true },
